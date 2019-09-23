@@ -10,6 +10,28 @@
 <div align="center">
   <h1>تقويم الصلاة</h1>
 
+
+<button onclick="getLocation()">الموقع الحالي</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "دائرة العرض: "  + position.coords.latitude + 
+  "<br> دائرة العرض:" + position.coords.longitude;
+}
+</script>
+
 <p><a href=simple.htm>يومي</a></p>
 <p><a href=monthly.htm>شهري</a></p>
 <p><a href=yearly.htm>سنوي</a></p>
