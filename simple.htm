@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 	<title> Daily Prayer Timetable </title>
 	<style>
 		body, td, th {font-family: verdana; font-size: 12px; color: #404040;}
@@ -13,15 +14,38 @@
 <body>
 
 <script type="text/javascript" src="PrayTimes.js"></script>
-
+<p align="center">
+<button onclick="getLocation()" >الموقع الحالي</button>
+</p>
+<p id="demo" align="center"></p>
+    
+    
 <br>
 <p align="center">Athens, OH, USA<p>
 <div align="center" id="table"></div>
 
 <script type="text/javascript">
-        prayTimes.setMethod('ISNA'); 
+var x123 = 123;
+var x321 = 321;
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+
+}
+
+function showPosition(position) {
+x123 = position.coords.latitude.toFixed(6);
+x321 = position.coords.longitude.toFixed(6) ;
+  x.innerHTML = "دائرة العرض : "  + x123 + 
+  "<br>" + x321 +" : خط الطول";
+            prayTimes.setMethod('ISNA'); 
 	var date = new Date(); // today
-	var times = prayTimes.getTimes(date, [39.325524, -82.095792], -5);
+	var times = prayTimes.getTimes(date, [ window.x123, window.x321], -5);
 	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Midnight'];
 
 	var html = '<table id="timetable">';
@@ -32,6 +56,12 @@
 	}
 	html += '</table>';
 	document.getElementById('table').innerHTML = html;
+}
+
+
+    
+
+
 
 </script>
 
